@@ -2,6 +2,12 @@
 
 Serviço web que compila projetos LaTeX e gera o PDF, a partir de um **upload de .zip** ou de um **link** (zip direto ou repositório GitHub). Roda em Docker Compose com TeXLive seletivo (pdflatex + BibTeX).
 
+## Por que este projeto existe
+
+Este compilador nasceu de uma necessidade real: compilar um documento acadêmico de ~70 páginas, com dezenas de imagens e bibliografia ABNT, que **estourava o limite de tempo de compilação da conta gratuita** das plataformas online de LaTeX. A saída foi trazer a compilação para a própria máquina, via Docker — sem limites de tempo, sem plano pago e usando o poder computacional do próprio computador.
+
+Se você já bateu nesse mesmo limite, este projeto é para você.
+
 ## Uso rápido
 
 ```bash
