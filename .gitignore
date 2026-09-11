@@ -12,3 +12,6 @@ venv/
 .idea/
 .vscode/
 *.swp
+
+# instruções locais de agente — não versionar
+CLAUDE.md
