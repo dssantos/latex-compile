@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compilador LaTeX</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Compilador LaTeX</h1>
+    <p class="subtitle">Envie um projeto (.zip) ou informe um link e receba o PDF compilado</p>
+  </header>
+
+  <main>
+    <section class="card" aria-label="Novo trabalho">
+      <h2>Novo trabalho</h2>
+
+      <div id="dropzone" role="button" tabindex="0" aria-label="Enviar arquivo zip">
+        <input type="file" id="fileInput" accept=".zip,application/zip,application/x-zip-compressed" hidden>
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <path d="M12 16V4m0 0l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3" stroke-linecap="round"/>
+        </svg>
+        <p><strong>Arraste um .zip aqui</strong><br>ou clique para escolher o arquivo</p>
+      </div>
+
+      <div class="divider"><span>ou compile de um link</span></div>
+
+      <form id="urlForm">
+        <input type="url" id="urlInput" required
+               placeholder="https://github.com/usuario/repo ou link direto do .zip">
+        <button type="submit" id="urlBtn">Compilar de link</button>
+      </form>
+
+      <label class="opt">
+        Arquivo principal (.tex) — opcional, deixe vazio para detecção automática
+        <input type="text" id="mainTex" placeholder="ex.: main.tex" spellcheck="false">
+      </label>
+
+      <p id="formError" class="error-msg" hidden></p>
+    </section>
+
+    <section class="card" aria-label="Trabalhos">
+      <h2>Trabalhos</h2>
+      <div class="table-wrap">
+        <table id="jobsTable">
+          <thead>
+            <tr><th>ID</th><th>Origem</th><th>Estado</th><th>Criado em</th><th>Principal</th><th>Duração</th><th class="th-actions">Ações</th></tr>
+          </thead>
+          <tbody id="jobsBody"></tbody>
+        </table>
+        <p id="emptyMsg" class="muted">Nenhum trabalho ainda — envie um zip ou um link ao lado.</p>
+        <p id="storageInfo" class="muted storage-info"></p>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="logModal" hidden>
+    <div class="modal-box wide">
+      <div class="modal-head">
+        <h3 id="logTitle">Log</h3>
+        <div class="modal-actions">
+          <a id="logDownload" class="btn ghost" download="build.log">Baixar log</a>
+          <button class="btn" data-close>Fechar</button>
+        </div>
+      </div>
+      <pre id="logContent" class="log-view" aria-live="polite"></pre>
+    </div>
+  </div>
+
+  <div class="modal" id="pdfModal" hidden>
+    <div class="modal-box wide tall">
+      <div class="modal-head">
+        <h3 id="pdfTitle">PDF</h3>
+        <div class="modal-actions">
+          <a id="pdfOpen" class="btn ghost" target="_blank" rel="noopener">Abrir em nova aba</a>
+          <button class="btn" data-close>Fechar</button>
+        </div>
+      </div>
+      <iframe id="pdfFrame" title="Pré-visualização do PDF"></iframe>
+    </div>
+  </div>
+
+  <footer>
+    <span id="serverStatus" class="muted">verificando serviço…</span>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

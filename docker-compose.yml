@@ -1,0 +1,26 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      MAX_UPLOAD_MB: "100"
+      MAX_DOWNLOAD_MB: "200"
+      MAX_EXTRACT_MB: "500"
+      COMPILE_TIMEOUT_S: "300"
+      MAX_WORKERS: "2"
+      KEEP_WORK: "false"
+      JOBS_QUOTA_MB: "1000"   # cota total do diretório jobs/ (0 = sem limite)
+      JOBS_MAX_AGE_H: "0"     # expira jobs por idade (0 = nunca)
+      # GITHUB_TOKEN: ""   # opcional: evita rate limit ao compilar de repos privados
+    volumes:
+      - ./jobs:/app/jobs
+    user: "1000:1000"
+    init: true # tini como PID 1: reaproveita processos zumbis de compilações mortas
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

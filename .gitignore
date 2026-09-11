@@ -1,0 +1,14 @@
+# projetos e artefatos compilados dos usuários
+jobs/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ambiente e editor
+.env
+.idea/
+.vscode/
+*.swp
