@@ -297,4 +297,21 @@ td.mono { font-family: var(--mono); font-size: 0.85rem; }
 footer {
   padding: 12px 32px;
   font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.github-cta a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.github-cta a:hover { text-decoration: underline; }
+
+@media (max-width: 600px) {
+  footer { flex-direction: column; align-items: flex-start; gap: 4px; }
 }
